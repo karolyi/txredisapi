@@ -1685,7 +1685,7 @@ class BaseRedisProtocol(LineReceiver):
                     ':' in x and not x.startswith('#')]
         d = {}
         for kv in keypairs:
-            k, v = kv.split(':')
+            k, v = kv.split(':', 1)
             d[k] = v
         return d
 
