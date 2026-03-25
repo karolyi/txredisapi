@@ -1,5 +1,12 @@
 # Changelog
 
+## Release 1.4.12 (2026-03-??)
+
+### Features
+
+- add specifying username for authentication
+
+---
 ## Release 1.4.11 (2025-04-11)
 
 ### Bugfixes

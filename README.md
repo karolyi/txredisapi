@@ -116,29 +116,29 @@ with absolutely no changes to the logic of your program.
 
 These are all the supported methods for connecting to Redis::
 
-    Connection(host, port, dbid, reconnect, charset)
-    lazyConnection(host, port, dbid, reconnect, charset)
+    Connection(host, port, dbid, reconnect, charset, password, username)
+    lazyConnection(host, port, dbid, reconnect, charset, password, username)
 
-    ConnectionPool(host, port, dbid, poolsize, reconnect, charset)
-    lazyConnectionPool(host, port, dbid, poolsize, reconnect, charset)
+    ConnectionPool(host, port, dbid, poolsize, reconnect, charset, password, username)
+    lazyConnectionPool(host, port, dbid, poolsize, reconnect, charset, password, username)
 
-    ShardedConnection(hosts, dbid, reconnect, charset)
-    lazyShardedConnection(hosts, dbid, reconnect, charset)
+    ShardedConnection(hosts, dbid, reconnect, charset, password, username)
+    lazyShardedConnection(hosts, dbid, reconnect, charset, password, username)
 
-    ShardedConnectionPool(hosts, dbid, poolsize, reconnect, charset)
-    lazyShardedConnectionPool(hosts, dbid, poolsize, reconnect, charset)
+    ShardedConnectionPool(hosts, dbid, poolsize, reconnect, charset, password, username)
+    lazyShardedConnectionPool(hosts, dbid, poolsize, reconnect, charset, password, username)
 
-    UnixConnection(path, dbid, reconnect, charset)
-    lazyUnixConnection(path, dbid, reconnect, charset)
+    UnixConnection(path, dbid, reconnect, charset, password, username)
+    lazyUnixConnection(path, dbid, reconnect, charset, password, username)
 
-    UnixConnectionPool(unix, dbid, poolsize, reconnect, charset)
-    lazyUnixConnectionPool(unix, dbid, poolsize, reconnect, charset)
+    UnixConnectionPool(unix, dbid, poolsize, reconnect, charset, password, username)
+    lazyUnixConnectionPool(unix, dbid, poolsize, reconnect, charset, password, username)
 
-    ShardedUnixConnection(paths, dbid, reconnect, charset)
-    lazyShardedUnixConnection(paths, dbid, reconnect, charset)
+    ShardedUnixConnection(paths, dbid, reconnect, charset, password, username)
+    lazyShardedUnixConnection(paths, dbid, reconnect, charset, password, username)
 
-    ShardedUnixConnectionPool(paths, dbid, poolsize, reconnect, charset)
-    lazyShardedUnixConnectionPool(paths, dbid, poolsize, reconnect, charset)
+    ShardedUnixConnectionPool(paths, dbid, poolsize, reconnect, charset, password, username)
+    lazyShardedUnixConnectionPool(paths, dbid, poolsize, reconnect, charset, password, username)
 
 
 The arguments are:
@@ -154,6 +154,7 @@ The arguments are:
 - hosts (for sharded): list of ``host:port`` pairs. [default: None]
 - paths (for sharded): list of ``pathnames``. [default: None]
 - password: password for the redis server. [default: None]
+- username: username for the redis server. [default: None]
 - ssl_context_factory: Either a boolean indicating wether to use SSL/TLS or a specific `ClientContextFactory`. [default: False]
 
 
@@ -619,6 +620,10 @@ This is how to authenticate::
     if __name__ == "__main__":
         main()
         reactor.run()
+
+For Redis 6+ ACL-based authentication, specify both ``username`` and ``password``::
+
+    redis = yield txredisapi.Connection(username="myuser", password="foobared")
         
 ### Connection using Redis Sentinel ###
 
